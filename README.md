@@ -1,4 +1,7 @@
-# Restivus [v0.8.12](https://github.com/kahmali/meteor-restivus/blob/devel/CHANGELOG.md#change-log) [![Build Status](https://travis-ci.org/kahmali/meteor-restivus.svg)](https://travis-ci.org/kahmali/meteor-restivus)
+# Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log)
+# Meteor Restivus is a fork of [nimble:restivus]() with the main purpose is transpiling source code from CoffeeScript to JavaScript.
+
+# Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log) [![Build Status](https://travis-ci.org/anttr/meteor-restivus.svg)](https://travis-ci.org/anttr/meteor-restivus)
 
 #### REST APIs for the Best of Us!
 
