@@ -1,5 +1,5 @@
 # Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log)
-# Meteor Restivus is a fork of [nimble:restivus]() with the main purpose is transpiling source code from CoffeeScript to JavaScript.
+# Meteor Restivus is a fork of [nimble:restivus](https://github.com/kahmali/meteor-restivus) with the main purpose is transpiling source code from CoffeeScript to JavaScript.
 
 # Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log) [![Build Status](https://travis-ci.org/anttr/meteor-restivus.svg)](https://travis-ci.org/anttr/meteor-restivus)
 
@@ -1051,7 +1051,7 @@ All responses contain the following defaults, which will be overridden with any 
     - This is a [CORS-compliant header][cors] that allows requests to be made to the API from any
       domain. Without this, requests from within the browser would only be allowed from the same
       domain the API is hosted on, which is typically not the intended behavior. This can be
-      [disabled by default](https://github.com/kahmali/meteor-restivus#enablecors), or also by
+      [disabled by default](https://github.com/anttr/meteor-restivus#enablecors), or also by
       returning a header of the same name with a domain specified (usually the domain the API is
       being hosted on).
 
@@ -1299,7 +1299,7 @@ Some other notable changes are:
 - More accurate response codes returned in API
 
 For a complete list of changes, check out the [change log]
-(https://github.com/kahmali/meteor-restivus/blob/devel/CHANGELOG.md#v080---2015-07-06).
+(https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md).
 
 ## Upgrading to 0.7.0
 
@@ -1336,12 +1336,12 @@ with that comes a few API-breaking changes:
 ## Change Log
 
 A detailed list of the changes between versions can be found in the [change log]
-(https://github.com/kahmali/meteor-restivus/blob/master/CHANGELOG.md).
+(https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md).
 
 ## Contributing
 
 Contributions to Restivus are welcome and appreciated! If you're interested in contributing, please
-check out [the guidelines](https://github.com/kahmali/meteor-restivus/blob/master/CONTRIBUTING.md)
+check out [the guidelines](https://github.com/anttr/meteor-restivus/blob/master/CONTRIBUTING.md)
 before getting started.
 
 ## Thanks
@@ -1358,7 +1358,7 @@ Also, thanks to the following projects, which RestStop2 was inspired by:
 
 ## License
 
-MIT License. See [LICENSE](https://github.com/kahmali/meteor-restivus/blob/master/LICENSE) for
+MIT License. See [LICENSE](https://github.com/anttr/meteor-restivus/blob/master/LICENSE) for
 details.
 
 
@@ -1370,7 +1370,7 @@ details.
 [json-routes]:          https://github.com/stubailo/meteor-rest/tree/master/packages/json-routes  "Simple JSON Routes"
 [node-request]:         https://nodejs.org/api/http.html#http_http_incomingmessage                 "Node Request Object Docs"
 [node-response]:        https://nodejs.org/api/http.html#http_class_http_serverresponse            "Node Response Object Docs"
-[restivus-change-log]:  https://github.com/kahmali/meteor-restivus/blob/master/CHANGELOG.md       "Restivus Change Log"
-[restivus-issues]:      https://github.com/kahmali/meteor-restivus/issues                         "Restivus Issues"
+[restivus-change-log]:  https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md       "Restivus Change Log"
+[restivus-issues]:      https://github.com/anttr/meteor-restivus/issues                         "Restivus Issues"
 [reststop2]:            https://github.com/Differential/reststop2                                 "RestStop2"
 [reststop2-docs]:       http://github.differential.com/reststop2/                                 "RestStop2 Docs"
