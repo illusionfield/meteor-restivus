@@ -1,44 +1,57 @@
+'use strict';
+
 Package.describe({
-    name   : 'anttr:restivus',
-    summary: 'Create authenticated REST APIs in Meteor 0.9+ via HTTP/HTTPS. Setup CRUD endpoints for Collections.',
-    version: '0.1.0',
-    git    : 'https://github.com/anttr/meteor-restivus.git',
+  summary: 'Create authenticated REST APIs in Meteor 1.7+ via HTTP/HTTPS. Setup CRUD endpoints for Collections.',
+  version: '0.9.0',
+  name: 'illusionfield:restivus',
+  git: 'https://github.com/illusionfield/meteor-restivus.git',
 });
 
-Package.onUse(function (api) {
-    // Minimum Meteor version
-    api.versionsFrom('METEOR@0.9.0');
+Package.onUse(api => {
+  api.versionsFrom('1.7');
 
-    // Meteor dependencies
-    api.use('check');
-    api.use('underscore');
-    api.use('accounts-password@1.3.3');
-    api.use('simple:json-routes@2.1.0');
+  api.use([
+    'ecmascript',
+    'check',
+    'underscore',
+    'ddp',
+    'ddp-common',
+    'accounts-password',
+    'simple:json-routes@2.1.0'
+  ], 'server');
 
-    api.addFiles('lib/auth.js', 'server');
-    api.addFiles('lib/iron-router-error-to-response.js', 'server');
-    api.addFiles('lib/route.js', 'server');
-    api.addFiles('lib/restivus.js', 'server');
+  api.addFiles([
+    'lib/auth.js',
+    'lib/route.js'
+  ], 'server');
 
-    // Exports
-    api.export('Restivus', 'server');
+  api.export([
+    'Restivus',
+  ], 'server');
+
+  api.mainModule('lib/restivus.js', 'server');
 });
 
-Package.onTest(function (api) {
-    // Meteor dependencies
-    api.use('practicalmeteor:munit');
-    api.use('test-helpers');
-    api.use('anttr:restivus');
-    api.use('http');
-    api.use('underscore');
-    api.use('accounts-base');
-    api.use('accounts-password');
-    api.use('mongo');
-    api.use('simple:json-routes@2.1.0');
+Package.onTest(api => {
+  api.use([
+    'illusionfield:restivus',
+    'ecmascript',
+    'ddp',
+    'ddp-common',
+    'practicalmeteor:munit',
+    'test-helpers',
+    'http',
+    'underscore',
+    'accounts-base',
+    'accounts-password',
+    'mongo',
+    'simple:json-routes@2.1.0'
+  ], 'server');
 
-    api.addFiles('lib/route.js', 'server');
-    api.addFiles('test/api_tests.js', 'server');
-    api.addFiles('test/route_unit_tests.js', 'server');
-    api.addFiles('test/authentication_tests.js', 'server');
-    api.addFiles('test/user_hook_tests.js', 'server');
+  api.addFiles([
+    'test/api_tests.js',
+    'test/route_unit_tests.js',
+    'test/authentication_tests.js',
+    'test/user_hook_tests.js'
+  ], 'server');
 });

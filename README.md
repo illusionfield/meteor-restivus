@@ -1,7 +1,43 @@
-# Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log)
-# Meteor Restivus is a fork of [nimble:restivus](https://github.com/kahmali/meteor-restivus) with the main purpose is transpiling source code from CoffeeScript to JavaScript.
+# Meteor Restivus [v0.9.0](https://github.com/illusionfield/meteor-restivus/blob/master/CHANGELOG.md#change-log)
+- Call meteor method
 
-# Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log) [![Build Status](https://travis-ci.org/anttr/meteor-restivus.svg)](https://travis-ci.org/anttr/meteor-restivus)
+###### example
+```javascript
+const Api = new Restivus({
+  useDefaultAuth: true,
+  authRequired: true,
+  defaultHeaders: {
+    'Content-Type': 'application/json'
+  },
+  prettyJson: true,
+});
+
+Meteor.methods({
+  'my.meteor.method'(data) {
+    check(data, String);
+
+    if(!Roles.userIsInRole(Meteor.user(), ['admin'])) {
+      throw new Meteor.Error(403, 'Access denied');
+    }
+
+    return `your param: ${data}`;
+  },
+});
+
+Api.addRoute('call-meteor-method/:param', {
+  get() {
+    const resp = this.call('my.meteor.method', this.urlParams.param);
+    return {
+      status: 'success',
+      data: resp,
+    };
+  }
+});
+```
+
+## Meteor Restivus is a fork of [anttr:restivus](https://github.com/anttr/meteor-restivus)
+
+# Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log)
 
 #### REST APIs for the Best of Us!
 
@@ -61,7 +97,7 @@ and is built on top of [Simple JSON Routes][json-routes] to provide:
   - [Upgrading to 0.7.0](#upgrading-to-070)
   - [Upgrading to 0.6.1](#upgrading-to-061)
 - [Resources](#resources)
-  - [Plugins](#plugins) 
+  - [Plugins](#plugins)
   - [Change Log](#change-log)
   - [Contributing](#contributing)
 
@@ -241,11 +277,11 @@ The following configuration options are available when initializing an API using
           returned, any `userId` and `token` will be ignored, as it's assumed that you have already
           successfully authenticated the user (by whatever means you deem necessary). The given user
           is simply attached to the [endpoint context](#endpoint-context), no questions asked.
-          
-      For either level of auth described above, you can optionally return a custom error response by 
-      providing that response in an `error` field of your response object. The `error` value can be 
-      [any valid response](#response-data). If an `error` field exists in the object returned from 
-      your custom auth function, all other fields will be ignored. Do **not** provide an `error` 
+
+      For either level of auth described above, you can optionally return a custom error response by
+      providing that response in an `error` field of your response object. The `error` value can be
+      [any valid response](#response-data). If an `error` field exists in the object returned from
+      your custom auth function, all other fields will be ignored. Do **not** provide an `error`
       value if you intend for the authentication to pass successfully.
 
 ##### `defaultHeaders`
@@ -313,7 +349,7 @@ The following configuration options are available when initializing an API using
     });
     ```
 
-Here's a sample configuration with the complete set of options: 
+Here's a sample configuration with the complete set of options:
 
 **Warning! For demo purposes only - using this configuration is not recommended!**
 

@@ -1,5 +1,10 @@
 # Change Log
 
+## [v0.9.0] - 2019-12-20
+
+#### Added
+- Call Meteor methods.
+
 ## [v0.1.0] - 2018-09-09
 
 #### Changed
