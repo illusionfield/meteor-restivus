@@ -1,4 +1,4 @@
-# Meteor Restivus [v0.9.0](https://github.com/illusionfield/meteor-restivus/blob/master/CHANGELOG.md#change-log)
+# Meteor Restivus [v0.9.1](https://github.com/illusionfield/meteor-restivus/blob/master/CHANGELOG.md#change-log)
 - Call meteor method
 
 ###### example
@@ -353,48 +353,37 @@ Here's a sample configuration with the complete set of options:
 
 **Warning! For demo purposes only - using this configuration is not recommended!**
 
-###### CoffeeScript
-```coffeescript
-  new Restivus
-    apiPath: 'my-api/'
-    auth:
-      token: 'auth.apiKey'
-      user: ->
-        userId: @request.headers['user-id']
-        token: @request.headers['login-token']
-    defaultHeaders:
-      'Content-Type': 'application/json'
-    onLoggedIn: -> console.log "#{@user.username} (#{@userId}) logged in"
-    onLoggedOut: -> console.log "#{@user.username} (#{@userId}) logged out"
-    prettyJson: true
-    useDefaultAuth: true
-    version: 'v1'
-```
-
 ###### JavaScript
 ```javascript
   new Restivus({
     apiPath: 'my-api/',
     auth: {
       token: 'auth.apiKey',
-      user: function () {
+      user() {
         return {
           userId: this.request.headers['user-id'],
           token: this.request.headers['login-token']
+        };
+      },
+      loginResponse(auth) {
+        return {
+          'X-User-Id': auth.userId,
+          'X-Auth-Token': auth.authToken,
         };
       }
     },
     defaultHeaders: {
       'Content-Type': 'application/json'
     },
-    onLoggedIn: function () {
+    onLoggedIn() {
       console.log(this.user.username + ' (' + this.userId + ') logged in');
     },
-    onLoggedOut: function () {
+    onLoggedOut() {
       console.log(this.user.username + ' (' + this.userId + ') logged out');
     },
     prettyJson: true,
     useDefaultAuth: true,
+    authRequired: false,
     version: 'v1'
   });
 ```

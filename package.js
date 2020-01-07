@@ -2,7 +2,7 @@
 
 Package.describe({
   summary: 'Create authenticated REST APIs in Meteor 1.7+ via HTTP/HTTPS. Setup CRUD endpoints for Collections.',
-  version: '0.9.0',
+  version: '0.9.1',
   name: 'illusionfield:restivus',
   git: 'https://github.com/illusionfield/meteor-restivus.git',
 });
