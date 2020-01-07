@@ -1,3 +1,5 @@
+import { Restivus } from '../lib/restivus.js';
+
 Meteor.startup(function () {
   const HookApi = new Restivus({
     useDefaultAuth: true,

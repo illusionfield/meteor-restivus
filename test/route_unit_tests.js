@@ -1,3 +1,4 @@
+import { Restivus } from '../lib/restivus.js';
 import { Route } from '../lib/route.js';
 
 Meteor.startup(function () {
