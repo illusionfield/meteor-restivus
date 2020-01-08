@@ -10,7 +10,6 @@ Package.describe({
 Npm.depends({
   'body-parser': '1.19.0',
   qs: '6.9.1',
-  connect: '3.7.0',
   'connect-route': '0.1.5',
 });
 

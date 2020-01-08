@@ -115,49 +115,6 @@ You can install Restivus using Meteor's package manager:
 Often, the easiest way to explain something is by example, so here's a short example of what it's
 like to create an API with Restivus (keep scrolling for a JavaScript version):
 
-###### CoffeeScript:
-```coffeescript
-Items = new Mongo.Collection 'items'
-Articles = new Mongo.Collection 'articles'
-
-# Restivus is only available on the server!
-if Meteor.isServer
-
-  # Global API configuration
-  Api = new Restivus
-    useDefaultAuth: true
-    prettyJson: true
-
-  # Generates: GET, POST on /api/items and GET, PUT, PATCH, DELETE on
-  # /api/items/:id for the Items collection
-  Api.addCollection Items
-
-  # Generates: POST on /api/users and GET, DELETE /api/users/:id for
-  # Meteor.users collection
-  Api.addCollection Meteor.users,
-    excludedEndpoints: ['getAll', 'put']
-    routeOptions:
-      authRequired: true
-    endpoints:
-      post:
-        authRequired: false
-      delete:
-        roleRequired: 'admin'
-
-  # Maps to: /api/articles/:id
-  Api.addRoute 'articles/:id', authRequired: true,
-    get: ->
-      Articles.findOne @urlParams.id
-    delete:
-      roleRequired: ['author', 'admin']
-      action: ->
-        if Articles.remove @urlParams.id
-          status: 'success', data: message: 'Article removed'
-        else
-          statusCode: 404
-          body: status: 'fail', message: 'Article not found'
-```
-
 ###### JavaScript:
 ```javascript
 Items = new Mongo.Collection('items');
@@ -795,13 +752,6 @@ In this example we have a parameter named `_id`. If we navigate to the `/post/5`
 inside of the GET endpoint function we can get the actual value of the `_id` from
 `this.urlParams._id`. In this case `this.urlParams._id => 5`.
 
-###### CoffeeScript:
-```coffeescript
-# Given a URL like "/post/5"
-Api.addRoute '/post/:_id',
-  get: ->
-    id = @urlParams._id # "5"
-```
 ###### JavaScript:
 ```javascript
 // Given a URL "/post/5"
@@ -816,15 +766,6 @@ You can have multiple URL parameters. In this example, we have an `_id` paramete
 parameter. If you navigate to the URL `/post/5/comments/100` then inside your endpoint function
 `this.urlParams._id => 5` and `this.urlParams.commentId => 100`.
 
-###### CoffeeScript:
-```coffeescript
-# Given a URL "/post/5/comments/100"
-Api.addRoute '/post/:_id/comments/:commentId',
-  get: ->
-    id = @urlParams._id # "5"
-    commentId = @urlParams.commentId # "100"
-```
-
 ###### JavaScript:
 ```javascript
 // Given a URL "/post/5/comments/100"
@@ -837,15 +778,6 @@ Api.addRoute('/post/:_id/comments/:commentId', {
 ```
 
 If there is a query string in the URL, you can access that using `this.queryParams`.
-
-###### Coffeescript:
-```coffeescript
-# Given the URL: "/post/5?q=liked#hash_fragment"
-Api.addRoute '/post/:_id',
-  get: ->
-    id = @urlParams._id
-    query = @queryParams # query.q -> "liked"
-```
 
 ###### JavaScript:
 ```javascript
@@ -924,25 +856,6 @@ and will get their default values from the route.
   `roleRequired` implies `authRequired: true`, so that option can be omitted without any
   consequence. For more on setting up roles, check out the [`alanning:roles`][alanning-roles]
   package.
-
-###### CoffeeScript
-```coffeescript
-Api.addRoute 'articles', {authRequired: true},
-  get:
-    authRequired: false
-    action: ->
-      # GET api/articles
-  post: ->
-    # POST api/articles
-  put: ->
-    # PUT api/articles
-  patch: ->
-    # PATCH api/articles
-  delete: ->
-    # DELETE api/articles
-  options: ->
-    # OPTIONS api/articles
-```
 
 ###### JavaScript
 ```javascript
@@ -1094,38 +1007,6 @@ configuration options. Here's a [good write-up]
 (http://www.troyhunt.com/2014/02/your-api-versioning-is-wrong-which-is.html) on some of the
 different API versioning strategies.
 
-###### CoffeeScript
-```coffeescript
-# Configure first version of the API
-ApiV1 = new Restivus
-  version: 'v1'
-  useDefaultAuth: true
-  prettyJson: true
-
-# Maps to api/v1/items and api/v1/items/:id
-ApiV1.addCollection Items
-  routeOptions: authRequired: true
-
-# Maps to api/v1/custom
-ApiV1.addRoute 'custom',
-  get: ->
-    'get something'
-
-# Configure another version of the API (with a different set of config options if needed)
-ApiV2 = new Restivus
-  version: 'v2'
-  enableCors: false
-
-# Maps to api/v2/items and api/v2/items/:id (with auth requirement removed in this version)
-ApiV2.addCollection Items
-
-# Maps to api/v2/custom (notice the different return value)
-ApiV2.addRoute 'custom',
-  get: ->
-    status: 'success'
-    data: 'get something different'
-```
-
 ###### JavaScript
 ```javascript
 // Configure first version of the API
@@ -1171,7 +1052,7 @@ ApiV2.addRoute('custom', {
 
 What's a REST API without awesome docs? I'll tell you: absolutely freaking useless. So to fix that,
 we use and recommend [apiDoc][]. It allows you to generate beautiful and extremely handy API docs
-from your JavaScript or CoffeeScript comments. It supports other comment styles as well, but we're
+from your JavaScript comments. It supports other comment styles as well, but we're
 Meteorites, so who cares? Check it out. Use it.
 
 # Consuming A Restivus API
@@ -1206,10 +1087,7 @@ to the `password`, the login endpoint requires one of the following parameters (
 body):
 - `email`: An email address associated with your `Meteor.user` account
 - `username`: The username associated with your `Meteor.user` account
-- `user`: **Note: This is for legacy purposes only. It is recommended to use one of the options
-  above.** Accepts either of the options listed above. Restivus will (very naively) attempt to
-  determine if the value provided is an email, otherwise it will assume it to be the username. This
-  can sometimes lead to unexpected behavior.
+- `userId`: The _id associated with your `Meteor.user` account
 
 A login will look something like
 

@@ -92,18 +92,18 @@ Meteor.startup(function () {
       password = 'password';
       // Delete the test account if it's still present
       Meteor.users.remove({
-        username: username,
+        username,
       });
       userId = Accounts.createUser({
-        username: username,
-        email   : email,
-        password: password,
+        username,
+        email,
+        password,
       });
       it('should only be available when configured', function (test, waitFor) {
         HTTP.post(Meteor.absoluteUrl('default-auth/login'), {
           data: {
-            user    : username,
-            password: password,
+            username,
+            password,
           },
         }, waitFor(function (error, result) {
           var response;
@@ -115,8 +115,8 @@ Meteor.startup(function () {
         }));
         HTTP.post(Meteor.absoluteUrl('no-default-auth/login'), {
           data: {
-            user    : username,
-            password: password,
+            username,
+            password,
           },
         }, waitFor(function (error, result) {
           var ref, ref1, response;
@@ -126,8 +126,8 @@ Meteor.startup(function () {
         }));
         HTTP.post(Meteor.absoluteUrl('legacy-default-auth/login'), {
           data: {
-            user    : username,
-            password: password,
+            username,
+            password,
           },
         }, waitFor(function (error, result) {
           var response;
@@ -139,8 +139,8 @@ Meteor.startup(function () {
         }));
         HTTP.post(Meteor.absoluteUrl('legacy-no-default-auth/login'), {
           data: {
-            user    : username,
-            password: password,
+            username,
+            password,
           },
         }, waitFor(function (error, result) {
           var ref, ref1, response;
@@ -153,8 +153,8 @@ Meteor.startup(function () {
         // Explicit username
         HTTP.post(Meteor.absoluteUrl('default-auth/login'), {
           data: {
-            username: username,
-            password: password,
+            username,
+            password,
           },
         }, waitFor(function (error, result) {
           var response;
@@ -167,8 +167,8 @@ Meteor.startup(function () {
         // Explicit email
         HTTP.post(Meteor.absoluteUrl('default-auth/login'), {
           data: {
-            email   : email,
-            password: password,
+            email,
+            password,
           },
         }, waitFor(function (error, result) {
           var response;
@@ -181,8 +181,8 @@ Meteor.startup(function () {
         // Implicit username
         HTTP.post(Meteor.absoluteUrl('default-auth/login'), {
           data: {
-            user    : username,
-            password: password,
+            username,
+            password,
           },
         }, waitFor(function (error, result) {
           var response;
@@ -195,8 +195,8 @@ Meteor.startup(function () {
         // Implicit email
         HTTP.post(Meteor.absoluteUrl('default-auth/login'), {
           data: {
-            user    : email,
-            password: password,
+            email,
+            password,
           },
         }, waitFor(function (error, result) {
           var response;
@@ -212,8 +212,8 @@ Meteor.startup(function () {
       it('should allow a user to login again, without affecting the first login', function (test, waitFor) {
         HTTP.post(Meteor.absoluteUrl('default-auth/login'), {
           data: {
-            user    : email,
-            password: password,
+            email,
+            password,
           },
         }, waitFor(function (error, result) {
           var response;
@@ -233,7 +233,7 @@ Meteor.startup(function () {
         startTime = new Date();
         HTTP.post(Meteor.absoluteUrl('default-auth/login'), {
           data: {
-            user    : username,
+            username,
             password: "NotAllowed",
           },
         }, waitFor(function (error, result) {
