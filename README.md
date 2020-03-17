@@ -1,5 +1,7 @@
-# Meteor Restivus [v0.9.1](https://github.com/illusionfield/meteor-restivus/blob/master/CHANGELOG.md#change-log)
-- Call meteor method
+# Meteor Restivus [v0.9.2](https://github.com/illusionfield/meteor-restivus/blob/master/CHANGELOG.md#change-log)
+- Deps update
+- Older
+  + Call meteor method
 
 ###### example
 ```javascript
