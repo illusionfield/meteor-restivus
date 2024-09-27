@@ -1,21 +1,19 @@
 'use strict';
 
 Package.describe({
-  summary: 'Create authenticated REST APIs in Meteor 1.7+ via HTTP/HTTPS. Setup CRUD endpoints for Collections.',
-  version: '0.9.2',
+  summary: 'Create authenticated REST APIs in Meteor 2.6+ via HTTP/HTTPS. Setup CRUD endpoints for Collections.',
+  version: '0.9.3',
   name: 'illusionfield:restivus',
   git: 'https://github.com/illusionfield/meteor-restivus.git',
   documentation: 'README.md',
 });
 
 Npm.depends({
-  'body-parser': '1.19.0',
-  qs: '6.9.1',
-  'connect-route': '0.1.5',
+  'body-parser': '2.0.1',
 });
 
 Package.onUse(api => {
-  api.versionsFrom('1.7');
+  api.versionsFrom('2.6');
   configure(api);
 
   api.mainModule('lib/restivus.js', 'server');
@@ -23,12 +21,13 @@ Package.onUse(api => {
 });
 
 Package.onTest(api => {
+  api.versionsFrom('2.6');
   configure(api);
 
   api.use([
-    'practicalmeteor:munit',
+    'practicalmeteor:munit@2.1.5',
     'test-helpers',
-    'http',
+    'http@2.0.0',
     'mongo',
   ], 'server');
 

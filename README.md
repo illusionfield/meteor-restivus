@@ -1,9 +1,13 @@
-# Meteor Restivus [v0.9.2](https://github.com/illusionfield/meteor-restivus/blob/master/CHANGELOG.md#change-log)
-- Deps update
-- Older
-  + Call meteor method
+# Meteor Restivus [v0.9.3](https://github.com/illusionfield/meteor-restivus/blob/master/CHANGELOG.md#change-log)
 
-###### example
+## Important Notice
+
+This is likely the last update for this package. Future efforts will focus on building packages for Meteor 3.0+.
+
+## This package is a fork of [anttr:restivus](https://github.com/anttr/meteor-restivus)
+
+### example
+
 ```javascript
 const Api = new Restivus({
   useDefaultAuth: true,
@@ -37,11 +41,7 @@ Api.addRoute('call-meteor-method/:param', {
 });
 ```
 
-## Meteor Restivus is a fork of [anttr:restivus](https://github.com/anttr/meteor-restivus)
-
-# Meteor Restivus [v0.1.0](https://github.com/anttr/meteor-restivus/blob/master/CHANGELOG.md#change-log)
-
-#### REST APIs for the Best of Us!
+## REST APIs for the Best of Us!
 
 Restivus makes building REST APIs in Meteor 0.9.0+ easier than ever before! The package is inspired
 by [RestStop2][reststop2-docs] and [Collection API](https://github.com/crazytoad/meteor-collectionapi),
